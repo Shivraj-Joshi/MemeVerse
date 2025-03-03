@@ -5,69 +5,44 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="container flex  items-center    justify-center">
-      <div className="form h-[550px] w-[400px] mt-4 bg-slate-100 py-5 px-4 hover:shadow-md ">
-        <h1 className="text-center text-[#717fe0] text-[25px] mb-2 font-semibold uppercase">
-          MemeVerse
-        </h1>
-        <p className="text-center mb-2 font-semibold ">Login to Continue</p>
-        <div className="bg-white h-[450px] px-8 px-4 py-6 ">
-          <div className="mb-4  ">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 text-sm font-semi-bold mb-2"
-            >
+    <>
+      <div className="h-screen w-full bg-[#0f0f0f] flex items-center justify-center ">
+        <div className="h-[500px] w-[500px] bg-black rounded-xl flex flex-col items-center justify-center">
+          <h3 className="text-white text-[30px] ">MemeVerse</h3>
+          <p className="text-white">Login to continue</p>
+          <div className="form-container bg-black h-[380px] w-[400px] flex flex-col p-10 gap-6">
+            <label htmlFor="#" className="text-white">
               Email
             </label>
             <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="off"
-              required
-              placeholder="Enter your email address"
-              className=" appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="Enter your Email"
+              className="outline-none rounded-xl p-4 text-white bg-[#0f0f0f] "
             />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 text-sm font-semi-bold mb-2"
-            >
+            <label htmlFor="#" className="text-white">
               Password
             </label>
             <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="off"
-              required
+              type="text"
               placeholder="Enter your Password"
-              className=" appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="outline-none rounded-xl p-4 text-white bg-[#0f0f0f] "
             />
-          </div>
 
-          <p className="mb-4">
-            Don't have account ?{" "}
-            <Link to="/signUp">
-              <span className="text-[#717fe0] hover:underline">SignUp</span>
-            </Link>
-          </p>
-
-          <div className="flex items-center justify-center">
-            <button
-              //   onClick={login}
-              className="border border-[#e4e4e4] cursor-pointer hover:bg-[#717fe0] hover:scale-95 transition-all hover:duration-700 hover:text-white mt-10 text-black font-semi-bold py-2 px-4 focus:outline-none focus:shadow-outline"
-            >
+            <button className="bg-[#0f0f0f] p-2 text-white text-[18px] rounded-xl hover:bg-[#fac036] cursor-pointer mt-4 ">
               Login
             </button>
           </div>
+          <p className="text-white text-[18px] ">
+            Don't have account ?{" "}
+            <Link to="/signup">
+              <span className="text-white hover:text-[#fac036] text-[18px] underline">
+                Register
+              </span>
+            </Link>{" "}
+          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
