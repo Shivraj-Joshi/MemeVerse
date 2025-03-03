@@ -6,7 +6,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="h-screen w-full bg-[#0f0f0f] flex items-center justify-center ">
+      <div className="h-screen w-full bg-[#fac036] flex items-center justify-center ">
         <div className="h-[500px] w-[500px] bg-black rounded-xl flex flex-col items-center justify-center">
           <h3 className="text-white text-[30px] ">MemeVerse</h3>
           <p className="text-white">Login to continue</p>
