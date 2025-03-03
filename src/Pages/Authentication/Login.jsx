@@ -1,8 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const login = async () => {
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+
+      console.log(result);
+      localStorage.setItem("user", JSON.stringify(result));
+      navigate("/");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -17,6 +36,8 @@ const Login = () => {
             <input
               type="text"
               placeholder="Enter your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="outline-none rounded-xl p-4 text-white bg-[#0f0f0f] "
             />
             <label htmlFor="#" className="text-white">
@@ -25,10 +46,15 @@ const Login = () => {
             <input
               type="text"
               placeholder="Enter your Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="outline-none rounded-xl p-4 text-white bg-[#0f0f0f] "
             />
 
-            <button className="bg-[#0f0f0f] p-2 text-white text-[18px] rounded-xl hover:bg-[#fac036] cursor-pointer mt-4 ">
+            <button
+              onClick={login}
+              className="bg-[#0f0f0f] p-2 text-white text-[18px] rounded-xl hover:bg-[#fac036] cursor-pointer mt-4 "
+            >
               Login
             </button>
           </div>

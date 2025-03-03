@@ -1,10 +1,40 @@
-import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, fireDB } from "../../FirebaseConfig";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const signup = async () => {
+    if (name === "" || email === "" || password === "") {
+      alert("please fill all the fields");
+      return toast.error("All fields are required");
+    }
+    try {
+      const users = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(users);
+
+      const user = {
+        name: name,
+        uid: users.user.uid,
+        email: users.user.email,
+        time: Timestamp.now(),
+      };
+
+      const userRef = collection(fireDB, "users");
+      await addDoc(userRef, user);
+      setName("");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -20,6 +50,8 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="text-white bg-[#0f0f0f] p-2 text-[18px] rounded-xl outline-none "
             />
             <label htmlFor="" className="text-white">
@@ -28,18 +60,25 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="text-white bg-[#0f0f0f] p-2 text-[18px]  rounded-xl outline-none"
             />
             <label htmlFor="#" className="text-white">
               Password
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="text-white bg-[#0f0f0f] p-2 text-[18px]  rounded-xl outline-none"
             />
 
-            <button className="bg-[#0f0f0f] p-2 text-white text-[18px] rounded-xl hover:bg-[#fac036] cursor-pointer mt-4 ">
+            <button
+              onClick={signup}
+              className="bg-[#0f0f0f] p-2 text-white text-[18px] rounded-xl hover:bg-[#fac036] cursor-pointer mt-4 "
+            >
               Register
             </button>
           </div>
