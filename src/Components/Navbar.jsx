@@ -9,12 +9,16 @@ const Navbar = () => {
         </div>
         <div className="items flex items-center  ">
           <ul className="flex items-center text-white  gap-10 text-[18px]">
-            <li className="list-none hover:cursor-pointer hover:text-[#fac036]">
-              Home
-            </li>
-            <li className="list-none hover:cursor-pointer hover:text-[#fac036]">
-              Memes
-            </li>
+            <Link to="/">
+              <li className="list-none hover:cursor-pointer hover:text-[#fac036]">
+                Home
+              </li>
+            </Link>
+            <Link to="/memeexplore">
+              <li className="list-none hover:cursor-pointer hover:text-[#fac036]">
+                Memes
+              </li>
+            </Link>
             <li className="list-none hover:cursor-pointer hover:text-[#fac036]">
               About
             </li>

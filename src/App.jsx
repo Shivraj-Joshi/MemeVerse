@@ -11,6 +11,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Authentication/Login";
 import SignUp from "./Pages/Authentication/SignUp";
 import User from "./Pages/User";
+import MemeExpolre from "./Pages/MemeExplore";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/memeexplore" element={<MemeExpolre />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route
