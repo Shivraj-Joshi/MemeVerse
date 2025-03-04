@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import Layout from "../../Components/Layout/Layout";
+import image from "../../assets/welcome.jpg";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -40,61 +41,65 @@ const SignUp = () => {
   return (
     <>
       <Layout>
-        <div className="h-screen w-full bg-[#fac036] flex items-center justify-center ">
-          <div className="h-[600px] w-[500px] bg-black rounded-xl flex flex-col items-center ">
-            <h3 className="text-white text-[30px] ">MemeVerse</h3>
-            <p className="text-white">Register to continue</p>
+        <section className="min-h-screen flex items-center justify-center font-mono bg-gradient-to-r from-cyan-500 from-10% via-indigo-500 via-50% to-sky-500 to-100%">
+          <div className="flex shadow-2xl mt-20">
+            <div className="flex flex-col items-center justify-center text-center p-8 gap-4 bg-white rounded-2xl xl:rounded-tr-none xl:rounded-br-none">
+              <h1 className="text-3xl font-bold">MemeVerse</h1>
 
-            <div className="input-container bg-black flex flex-col gap-8 mt-4 h-[450px] w-[400px] p-4">
-              <label htmlFor="" className="text-white">
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="text-white bg-[#0f0f0f] p-2 text-[18px] rounded-xl outline-none "
-              />
-              <label htmlFor="" className="text-white">
-                Email
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="text-white bg-[#0f0f0f] p-2 text-[18px]  rounded-xl outline-none"
-              />
-              <label htmlFor="#" className="text-white">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="text-white bg-[#0f0f0f] p-2 text-[18px]  rounded-xl outline-none"
-              />
-
+              <div className="flex flex-col text-xl text-left gap-1">
+                <span>Username</span>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="rounded-md outline-none p-1  border-1 focus:border-cyan-400 focus:bg-slate-50"
+                  placeholder="enter email"
+                />
+              </div>
+              <div className="flex flex-col text-xl text-left gap-1">
+                <span>Email</span>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="rounded-md outline-none p-1  border-1 focus:border-cyan-400 focus:bg-slate-50"
+                  placeholder="enter email"
+                />
+              </div>
+              <div className="flex flex-col text-xl text-left gap-1 ">
+                <span>Password</span>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="rounded-md outline-none p-1  border-1 focus:border-cyan-400 focus:bg-slate-50"
+                  placeholder="enter password"
+                />
+                <div className="flex gap-1 items-center">
+                  <input type="checkbox" />
+                  <span className="text-base">Remember password</span>
+                </div>
+              </div>
               <button
                 onClick={signup}
-                className="bg-[#0f0f0f] p-2 text-white text-[18px] rounded-xl hover:bg-[#fac036] cursor-pointer mt-4 "
+                className="px-10 py-2 text-2xl rounded-md cursor-pointer bg-gradient-to-tr from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white"
               >
                 Register
               </button>
+              <p>
+                Already have an account ?{" "}
+                <Link to="/login">
+                  <span className="text-blue-400">Login</span>
+                </Link>
+              </p>
             </div>
-
-            <p className="text-white text-[18px] mt-6 ">
-              Already an user ?{" "}
-              <Link to="/login">
-                <span className="text-white hover:text-[#fac036] text-[18px] underline">
-                  Login
-                </span>
-              </Link>{" "}
-            </p>
+            <img
+              src={image}
+              alt=""
+              className="max-w-[460px] object-cover lg:rounded-tr-2xl xl:rounded-br-2xl xl:block hidden"
+            />
           </div>
-        </div>
+        </section>
       </Layout>
     </>
   );
