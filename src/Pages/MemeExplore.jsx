@@ -15,17 +15,13 @@ const MemeExpolre = () => {
                 key={meme.id}
                 className="mt-16 border bg-black h-[300px] mb-4 relative overflow-hidden group transition rounded-lg  "
               >
-                <div className="w-[200px] mx-auto flex justify-center items-center object-cover">
-                  <img
-                    className="max-h-full  group-hover:scale-90  transition duration-300"
-                    src={meme.url}
-                    alt=""
-                  />
-                </div>
+                <img
+                  className=" group-hover:scale-90  transition duration-300 obejct-cover"
+                  src={meme.url}
+                  alt=""
+                />
 
                 <p className="text-white">{meme.name}</p>
-                <p className="text-white">{meme.captions}</p>
-                <p className="text-white">{meme.box_count}</p>
               </div>
             ))
           ) : (

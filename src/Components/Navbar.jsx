@@ -12,11 +12,13 @@ const Navbar = () => {
   return (
     <div className="h-[55x] w-full bg-black flex items-center justify-center fixed z-50 top-0 font-mono ">
       <div className="container  h-[60px] w-full flex items-center justify-between  ">
+        {/* logo */}
         <Link to="/">
           <div className="logo text-[30px] uppercase hover:cursor-pointer text-[#fac036]">
             memeverse
           </div>
         </Link>
+        {/* page links */}
         <div className="items flex items-center  ">
           <ul className="flex items-center text-white  gap-10 text-[18px]">
             <Link to="/">
@@ -34,6 +36,8 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+
+        {/* logout button */}
         {user ? (
           <div className="accounts flex items-center justify-center">
             <button

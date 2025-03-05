@@ -10,9 +10,10 @@ import MemeContextProvider from "./Context/MemeContextProvider";
 import Home from "./Pages/Home";
 import Login from "./Pages/Authentication/Login";
 import SignUp from "./Pages/Authentication/SignUp";
-import User from "./Pages/User";
 import MemeExpolre from "./Pages/MemeExplore";
 import NoPage from "./Pages/NoPage";
+import UserDashboard from "./Pages/UserDashboard";
+import CreateMeme from "./Pages/CreateMeme";
 // import DummyLogin from "./Pages/Authentication/DummyLogin";
 
 function App() {
@@ -24,13 +25,20 @@ function App() {
           <Route path="/memeexplore" element={<MemeExpolre />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NoPage />} />
-
           <Route path="/signup" element={<SignUp />} />
           <Route
-            path="/user"
+            path="/userdashboard"
             element={
               <ProtectedRout>
-                <User />
+                <UserDashboard />
+              </ProtectedRout>
+            }
+          />
+          <Route
+            path="/creatememe"
+            element={
+              <ProtectedRout>
+                <CreateMeme />
               </ProtectedRout>
             }
           />
