@@ -19,13 +19,20 @@ import image2 from "../assets/welcome2.jpg";
 import { Link } from "react-router-dom";
 
 function UserDashboard() {
+  const logout = () => {
+    localStorage.removeItem("user");
+
+    window.location.href = "/login";
+  };
+
   return (
     <Layout>
       <div className="py-10 mt-20">
+        {/* user profile section  */}
         <div className="flex flex-wrap justify-start items-center lg:justify-center gap-2 lg:gap-10 px-4 lg:px-0 mb-8">
           <div className="left">
             <img
-              className=" w-40 h-40  object-cover rounded-full border-2 border-pink-600 p-1"
+              className=" w-40 h-40  object-cover rounded-full border-2 border-sky-600 p-1"
               src={image}
               alt="profile"
             />
@@ -38,18 +45,21 @@ function UserDashboard() {
             <h2 className="font-semibold">Software Developer</h2>
             <h2 className="font-semibold">shivrajjoshi@gmail.com</h2>
             <h2 className="font-semibold">
-              <span>Total Blog : </span> 15
+              <span>Total Memes Created : </span> 15
             </h2>
             <div className=" flex gap-2 mt-2">
               <Link to={"/creatememe"}>
                 <div className=" mb-2 ">
                   <button className="px-8 py-2 bg-sky-400 text-white rounded-xl cursor-pointer">
-                    Create Blog
+                    Create Meme
                   </button>
                 </div>
               </Link>
               <div className="mb-2">
-                <button className="px-8 py-2 text-white cursor-pointer bg-red-500 rounded-xl">
+                <button
+                  onClick={logout}
+                  className="px-8 py-2 text-white cursor-pointer bg-red-500 rounded-xl"
+                >
                   Logout
                 </button>
               </div>

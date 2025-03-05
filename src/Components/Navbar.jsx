@@ -31,9 +31,15 @@ const Navbar = () => {
                 Memes
               </li>
             </Link>
-            <li className="list-none hover:cursor-pointer hover:text-[#fac036]">
-              About
-            </li>
+            {user ? (
+              <Link to="/userdashboard">
+                <li className="list-none hover:cursor-pointer hover:text-[#fac036]">
+                  Account
+                </li>
+              </Link>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
 
