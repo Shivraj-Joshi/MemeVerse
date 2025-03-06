@@ -29,7 +29,7 @@ function UserDashboard() {
     <Layout>
       <div className="py-10 mt-20">
         {/* user profile section  */}
-        <div className="flex flex-wrap justify-start items-center lg:justify-center gap-2 lg:gap-10 px-4 lg:px-0 mb-8">
+        <div className="flex flex-wrap justify-center items-center lg:justify-center gap-2 lg:gap-10 px-4 lg:px-0 mb-8">
           <div className="left">
             <img
               className=" w-40 h-40  object-cover rounded-full border-2 border-sky-600 p-1"
@@ -38,13 +38,17 @@ function UserDashboard() {
             />
           </div>
           <div className="right">
-            <h1 className="text-center font-bold text-2xl mb-2">
+            <h1 className="text-center lg:text-left font-bold text-2xl mb-2">
               Shivraj Joshi
             </h1>
 
-            <h2 className="font-semibold">Software Developer</h2>
-            <h2 className="font-semibold">shivrajjoshi@gmail.com</h2>
-            <h2 className="font-semibold">
+            <h2 className="font-semibold text-center lg:text-left">
+              Software Developer
+            </h2>
+            <h2 className="font-semibold text-center lg:text-left">
+              shivrajjoshi@gmail.com
+            </h2>
+            <h2 className="font-semibold text-center lg:text-left">
               <span>Total Memes Created : </span> 15
             </h2>
             <div className=" flex gap-2 mt-2">
