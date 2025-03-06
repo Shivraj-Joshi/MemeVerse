@@ -117,36 +117,6 @@ function Home() {
                 </div>
               </div>
             </div>
-            {/* card 4 */}
-            <div className="p-4 md:w-1/3">
-              <div
-                className="h-full shadow-lg  hover:-translate-y-1 cursor-pointer hover:shadow-gray-400
-                               
-                                rounded-xl overflow-hidden"
-              >
-                {/* Blog Thumbnail  */}
-                <img className=" w-full" src={image} alt="blog" />
-
-                {/* Top Items  */}
-                <div className="p-6">
-                  {/* Blog Date  */}
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    {"25 Sep 2023"}
-                  </h2>
-
-                  {/* Blog Title  */}
-                  <h1 className="title-font text-lg font-bold text-gray-900 mb-3">
-                    {"React Introduction"}
-                  </h1>
-
-                  {/* Blog Description  */}
-                  <p className="leading-relaxed mb-3">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings
-                    jianbing microdosing tousled waistcoat.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
