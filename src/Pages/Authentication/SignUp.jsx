@@ -1,9 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, fireDB } from "../../FirebaseConfig";
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { account } from "../../appwriteConfig";
+import { ID } from "appwrite";
 import Layout from "../../Components/Layout/Layout";
 import image from "../../assets/welcome.jpg";
 
@@ -12,29 +10,23 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const signup = async () => {
-    if (name === "" || email === "" || password === "") {
-      alert("please fill all the fields");
-      return toast.error("All fields are required");
-    }
     try {
-      const users = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(users);
+      if (!email || !password) {
+        alert("please fill all fields");
+        return;
+      }
+      const user = await account.create(ID.unique(), email, password, name);
+      console.log("user signed up:", user);
 
-      const user = {
-        name: name,
-        uid: users.user.uid,
-        email: users.user.email,
-        time: Timestamp.now(),
-      };
-
-      const userRef = collection(fireDB, "users");
-      await addDoc(userRef, user);
       setName("");
       setEmail("");
       setPassword("");
+      navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   };
 

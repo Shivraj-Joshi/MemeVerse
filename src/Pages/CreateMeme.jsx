@@ -1,13 +1,58 @@
 import React, { useState, useContext } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { storage } from "../appwriteConfig";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
-function CreateBlog() {
-  const [blogs, setBlogs] = useState("");
+function CreateMemes() {
+  const [memes, setMemes] = useState({
+    title: "",
+    category: "",
+    content: "",
+  });
+
+  //   add post function
+  const addPost = async () => {
+    if (
+      memes.title === "" ||
+      memes.category === "" ||
+      memes.content === "" ||
+      !thumbnail
+    ) {
+      return alert("all fields are compulsory");
+    }
+    const imageUrl = await uploadeImage();
+    if (!imageUrl) {
+      return alert("Image upload failed");
+    }
+    setMemes({ ...memes, thumbnail: imageUrl });
+    console.log("post created with image:", imageUrl);
+  };
+
+  //uploade image function
+
+  const uploadeImage = async () => {
+    if (!thumbnail) {
+      console.log("no file selected");
+      return;
+    }
+
+    try {
+      const response = await storage.createFile(
+        "67d2cfd2000120010cc5",
+        ID.unique(),
+        thumbnail
+      );
+      const fileId = response.$id;
+      return `https://cloud.appwrite.io/v1/storage/buckets/67d2cfd2000120010cc5/files/${fileId}/view?project=YOUR_PROJECT_ID`;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [thumbnail, setthumbnail] = useState();
 
-  const [text, settext] = useState("");
+  const [text, setText] = useState("");
   console.log("Value: ");
   console.log("text: ", text);
 
@@ -16,7 +61,7 @@ function CreateBlog() {
     return { __html: c };
   }
   return (
-    <div className=" container mx-auto max-w-5xl py-6 bg-slate-300">
+    <div className=" container mx-auto max-w-5xl py-6 bg-slate-500">
       <div className="p-5">
         {/* Top Item  */}
         <div className="mb-2 flex justify-between">
@@ -29,12 +74,12 @@ function CreateBlog() {
             </Link>
 
             {/* Text  */}
-            <h3>Create meme </h3>
+            <h3 className="text-white">Create meme </h3>
           </div>
         </div>
 
         {/* main Content  */}
-        <div className="mb-3">
+        <div className="mb-3 text-white">
           {/* Thumbnail  */}
           {thumbnail && (
             <img
@@ -52,7 +97,11 @@ function CreateBlog() {
             type="file"
             label="Upload thumbnail"
             className="shadow-[inset_0_0_4px_rgba(0,0,0,0.6)] placeholder-black w-full rounded-md p-1"
-            onChange={(e) => setthumbnail(e.target.files[0])}
+            onChange={(e) => {
+              if (e.target.files.length > 0) {
+                setthumbnail(e.target.files[0]);
+              }
+            }}
             placeholder="choose file"
           />
         </div>
@@ -62,9 +111,11 @@ function CreateBlog() {
           <input
             label="Enter your Title"
             className="shadow-[inset_0_0_4px_rgba(0,0,0,0.6)] w-full rounded-md p-1.5 
-                 outline-none"
+                 outline-none "
             placeholder="Enter Your Title"
             name="title"
+            onChange={(e) => setMemes({ ...memes, title: e.target.value })}
+            value={memes.title}
           />
         </div>
 
@@ -76,6 +127,8 @@ function CreateBlog() {
                  outline-none"
             placeholder="Enter Your Category"
             name="category"
+            onChange={(e) => setMemes({ ...memes, category: e.target.value })}
+            value={memes.category}
           />
         </div>
 
@@ -83,11 +136,11 @@ function CreateBlog() {
         <Editor
           apiKey="9gh8n56xurfxmdpw636hadwlfkx4xu63qezvtocmvexdjs1q"
           onEditorChange={(newValue, editor) => {
-            setBlogs({ blogs, content: newValue });
-            settext(editor.getContent({ format: "text" }));
+            setMemes({ memes, content: newValue });
+            setText(editor.getContent({ format: "text" }));
           }}
           onInit={(evt, editor) => {
-            settext(editor.getContent({ format: "text" }));
+            setText(editor.getContent({ format: "text" }));
           }}
           init={{
             plugins:
@@ -96,13 +149,16 @@ function CreateBlog() {
         />
 
         {/* Five Submit Button  */}
-        <button className=" w-full mt-5 bg-sky-400 text-white p-2 rounded-xl font-bold cursor-pointer">
+        <button
+          onClick={addPost}
+          className=" w-full mt-5 bg-sky-400 text-white p-2 rounded-xl font-bold cursor-pointer"
+        >
           Send
         </button>
 
         {/* Six Preview Section  */}
         <div className="">
-          <h1 className=" text-center mb-3 text-2xl">Preview</h1>
+          <h1 className=" text-center mb-3 text-2xl text-white">Preview</h1>
           <div className="content">
             <div
               className={`[&> h1]:text-[32px] [&>h1]:font-bold  [&>h1]:mb-2.5
@@ -136,7 +192,7 @@ function CreateBlog() {
 
                         [&>img]:rounded-lg
                         `}
-              dangerouslySetInnerHTML={createMarkup(blogs.content)}
+              dangerouslySetInnerHTML={createMarkup(memes.content)}
             ></div>
           </div>
         </div>
@@ -145,4 +201,4 @@ function CreateBlog() {
   );
 }
 
-export default CreateBlog;
+export default CreateMemes;

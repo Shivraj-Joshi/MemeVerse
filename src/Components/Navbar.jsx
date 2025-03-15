@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { account } from "../appwriteConfig";
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const logout = () => {
-    localStorage.removeItem("user");
-
-    window.location.href = "/login";
+  const logout = async () => {
+    try {
+      await account.deleteSession("current");
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

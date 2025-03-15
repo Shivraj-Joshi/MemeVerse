@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { account } from "../../appwriteConfig";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+
 import Layout from "../../Components/Layout/Layout";
 import image from "../../assets/control.png";
 
@@ -13,15 +13,14 @@ const Login = () => {
 
   const login = async () => {
     try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
-
-      console.log(result);
-      localStorage.setItem("user", JSON.stringify(result));
-      navigate("/");
+      const session = await account.createEmailPasswordSession(email, password);
+      console.log("user logged in :", session);
+      localStorage.setItem("user", JSON.stringify(session));
       setEmail("");
       setPassword("");
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      console.log("error:", error);
     }
   };
 

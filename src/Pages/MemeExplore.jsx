@@ -15,7 +15,7 @@ const MemeExpolre = () => {
               {data ? (
                 data.map((meme) => {
                   return (
-                    <div className="p-4 md:w-1/3 " key={meme.id}>
+                    <div className="p-4 md:w-1/4 " key={meme.id}>
                       <div
                         className="h-full shadow-lg  hover:-translate-y-1 cursor-pointer hover:shadow-gray-400
                                          
